@@ -44,7 +44,7 @@ exports.postSignup = (req, res, next) => {
               });
             })
             .then((result) => {
-              return res.send("Usuario criado com sucesso");
+              return res.status(201).send("Usuario criado com sucesso");
             })
             .catch((err) => {
               console.log(err);
@@ -54,7 +54,7 @@ exports.postSignup = (req, res, next) => {
           console.log(err);
         });
     } else {
-      res.status(200).send("Invalid Captcha");
+      res.status(406).send("Recaptcha invalido");
     }
   });
 };

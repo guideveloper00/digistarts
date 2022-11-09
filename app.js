@@ -7,7 +7,12 @@ const path = require("path");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const cors = require("cors");
+const csrf = require("csrf-simple-origin");
+
 require("dotenv").config();
+
+const allowedOrigins = ["http://localhost:3000"];
+app.use(csrf(allowedOrigins));
 
 const secretEnv = process.env.SECRET;
 const passwordEnv = process.env.PASSWORD;
@@ -45,6 +50,9 @@ app.use(
   })
 );
 
+const middleware = csrf(allowedOrigins);
+app.use(middleware);
+
 app.use(authRoutes);
 
 app.use("/", (req, res, next) => {
@@ -54,7 +62,6 @@ app.use("/", (req, res, next) => {
       req.session.user = user;
       req.session.save((err) => {
         console.log(err);
-        res.send("<div>hello world!</div>");
         next();
       });
     })
