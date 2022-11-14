@@ -58,3 +58,30 @@ exports.postSignup = (req, res, next) => {
     }
   });
 };
+
+exports.postSignin = (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  console.log("postado");
+  User.findAll({ where: { email: email } })
+    .then((users) => {
+      const user = users[0];
+      if (!user) {
+        return;
+      }
+      bcrypt
+        .compare(password, user.password)
+        .then((doMatch) => {
+          console.log(doMatch);
+          if (doMatch) {
+            req.session.user = user;
+            res.send();
+            return;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => console.log(err));
+};
