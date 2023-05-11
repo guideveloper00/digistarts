@@ -17,19 +17,3 @@ update dos dados do usuário (implementado para que apenas o próprio usuário p
 
 /user/delete - DELETE
 delete dos dados do usuário (implementado para que apenas o ADMIN possa deletar, mas também é possivel implementar para dar permissão ao usuário)
-
----------------------------------------------------
-
-dentro dos arquivos do projeto:
-
-app.js:
-    const secretEnv = process.env.SECRET;
-
-.env:
-    SECRET={sua senha}
-
-utils/database.js:
-    const sequelize = new Sequelize("digistarts", "root", {sua senha}, {
-        dialect: "mysql",
-        host: "localhost",
-    });
