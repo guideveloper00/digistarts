@@ -4,21 +4,10 @@ const authController = require("../controllers/auth");
 
 const router = express.Router();
 
-router.get("/login", (req, res) => {
-  console.log(req);
-  if (req.session.user) {
-    res.send({ loggedIn: true, user: req.session.user });
-  } else {
-    res.send({ loggedIn: false });
-  }
-});
+router.post("/signup", authController.postSignup);
 
-router.get("/auth/signup", (req, res) => {
-  console.log(req.session.isLoggedIn);
-});
+router.post("/signin", authController.postSignin);
 
-router.post("/auth/signup", authController.postSignup);
-
-router.post("/auth/signin", authController.postSignin);
+router.post("/signout", authController.postSignout);
 
 module.exports = router;

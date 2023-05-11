@@ -1,0 +1,161 @@
+openapi: 3.0.0
+info:
+  title: digistarts
+  description: Documentação da minha API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001
+paths:
+  /auth/signup:
+    post:
+      summary: Criação de usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                lastName:
+                  type: string
+                cpf:
+                  type: string
+                phoneNumber:
+                  type: string
+                birthday:
+                  type: string
+                isAdmin:
+                  type: boolean
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                passwordConfirmation:
+                  type: string
+              required:
+                - name
+                - lastName
+                - email
+                - cpf
+                - isAdmin
+                - phoneNumber
+                - birthday
+                - password
+                - passwordConfirmation
+      responses:
+        '200':
+          description: Usuário criado com sucesso
+        '400':
+          description: Requisição inválida
+        '406':
+          description: Erro no preenchimento das informações
+        '500':
+          description: Erro interno do servidor
+
+  /auth/signin:
+    post:
+      summary: Login de usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Usuário logado com sucesso
+        '401':
+          description: Credenciais inválidas
+        '500':
+          description: Erro interno do servidor
+
+  /auth/signout:
+    post:
+      summary: Logoff de usuário, utiliza o objeto interno do session
+      responses:
+        '200':
+          description: Sucesso na operação
+        '500':
+          description: Erro interno do servidor
+
+  /user/status:
+    get:
+      summary: Retorna informações do usuário logado
+      responses:
+        '200':
+          description: Sucesso na operação
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isLoggedIn:
+                    type: boolean
+                    description: verifica o atual status do usuário
+                  user:
+                    type: object
+                    description: informações do usuário
+        '401':
+          description: Não autorizado
+        '500':
+          description: Erro interno do servidor
+
+  /user/update:
+    patch:
+      summary: Atualiza os dados do usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
+                lastName:
+                  type: string
+                cpf:
+                  type: string
+                phoneNumber:
+                  type: string
+                birthday:
+                  type: string
+                isAdmin:
+                  type: boolean
+                password:
+                  type: string
+                passwordConfirmation:
+                  type: string
+              required:
+                - email
+        responses:
+          '200':
+            description: update dos dados do usuário (implementado para que apenas o próprio usuário possa atualizar, mas também é possível implementar para dar permissão ao ADMIN)
+
+  /user/delete/{email}:
+    delete:
+      summary: Deleta os dados do usuário
+      parameters:
+        - name: email
+          in: path
+          required: true
+          description: Email do usuário a ser deletado
+          schema:
+            type: string
+      responses:
+        '200':
+          description: delete dos dados do usuário (implementado para que apenas o ADMIN possa deletar, mas também é possível implementar para dar permissão ao usuário)

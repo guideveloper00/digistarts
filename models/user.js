@@ -7,19 +7,34 @@ const User = sequelize.define("user", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
+  lastName: {
+    type: Sequelize.STRING,
     allowNull: false,
-    primaryKey: true,
+  },
+  cpf: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  phoneNumber: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  birthday: {
+    type: Sequelize.STRING,
+    allowNull: false,
   },
   email: {
+    primaryKey: true,
     type: Sequelize.STRING,
     allowNull: false,
   },
   password: {
     type: Sequelize.STRING,
     allowNull: false,
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    allowNull: true,
   },
 });
 
