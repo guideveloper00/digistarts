@@ -5,11 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
-    "start": "node index.js"
-=======
     "start": "node app.js"
->>>>>>> 7fa909d5a1917ccdd861d6b0114e0d738017300b
   },
   "author": "Guilherme Gonçalves",
   "license": "ISC",
