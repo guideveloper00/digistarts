@@ -20,10 +20,6 @@ delete dos dados do usuário (implementado para que apenas o ADMIN possa deletar
 
 ---------------------------------------------------
 
-É necessário criar um banco de dados em MySQL para rodar este projeto, no meu caso criei o banco com o nome: digistarts.
-
----------------------------------------------------
-
 dentro dos arquivos do projeto:
 
 app.js:
