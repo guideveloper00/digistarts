@@ -36,7 +36,7 @@ exports.postSignup = (req, res, next) => {
             isAdmin: false
           });
         })
-        .then((result) => {
+        .then(() => {
           return res.status(201).send("Usuario criado com sucesso");
         })
         .catch((err) => {
